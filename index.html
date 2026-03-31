@@ -3,11 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EASE | Premium ISU Varsity</title>
-    <link rel="stylesheet" href="style.css">
+    <title>EASE | Premium ISU Varsity Hub</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
+    <div id="points-badge" class="points-badge glass">
+        <i class="fas fa-crown"></i> EASE Points: <span id="user-points">0</span>
+    </div>
 
     <nav class="glass-nav">
         <div class="logo">E<span>ASE</span></div>
@@ -18,7 +23,6 @@
             <li><a href="#" onclick="showPage('contact')">Contact</a></li>
         </ul>
         <div class="nav-actions">
-            <i class="fas fa-search"></i>
             <div class="cart-icon" onclick="openCart()">
                 <i class="fas fa-shopping-bag"></i>
                 <span id="cart-count">0</span>
@@ -26,84 +30,127 @@
         </div>
     </nav>
 
-    <main id="content-area">
-
+    <main>
+        
         <section id="home" class="page active">
             <div class="hero">
                 <div class="hero-text">
-                    <h2>ELEVATE YOUR STYLE</h2>
-                    <h1>ISU VARSITY <span class="gold">2026</span></h1>
-                    <p>Experience the premium quality of Isabela State University's official merchandise. Crafted with EASE.</p>
-                    <button class="btn-primary" onclick="showPage('shop')">SHOP NOW</button>
+                    <span class="tagline">Official ISU Merchandise</span>
+                    <h1>EASE VARSITY <span class="gold">2026</span></h1>
+                    <p>High-quality fabrics meets modern university aesthetic. Exclusive for Cabagan Campus.</p>
+                    <div class="hero-btns">
+                        <button class="btn-primary" onclick="showPage('shop')">EXPLORE SHOP</button>
+                        <button class="btn-outline" onclick="showPage('size-guide')">SIZE GUIDE</button>
+                    </div>
                 </div>
                 <div class="hero-image">
-                    <img src="jacket-front.png" id="main-jacket" class="floating">
-                    <div class="interact-btns">
-                        <button onclick="rotateJacket()"><i class="fas fa-sync"></i> SPIN 3D</button>
-                        <button><i class="fas fa-expand"></i> AR VIEW</button>
+                    <img src="jacket-front.png" id="main-jacket" class="floating-jacket" alt="Varsity Jacket">
+                    <div class="interact-panel glass">
+                        <button onclick="rotateJacket()"><i class="fas fa-sync-alt"></i> SPIN 3D</button>
                     </div>
                 </div>
             </div>
         </section>
 
         <section id="shop" class="page">
-            <h2 class="section-title">Latest Collections</h2>
+            <div class="section-header">
+                <h2>Our Collection</h2>
+                <p>Limited stocks available. <span class="low-stock">Low Stock Warning!</span></p>
+            </div>
             <div class="product-grid">
                 <div class="product-card glass">
-                    <img src="jacket-front.png">
-                    <h3>ISU "EASE" Hoodie</h3>
-                    <p>₱2,499.00</p>
-                    <button onclick="addToCart('ISU Hoodie', 2499)">Add to Cart</button>
+                    <img src="jacket-front.png" alt="Jacket">
+                    <h3>Premium ISU Jacket</h3>
+                    <p class="price">₱2,499.00</p>
+                    <button class="add-to-cart" onclick="addToCart('ISU Varsity Jacket', 2499)">ADD TO BAG</button>
                 </div>
                 <div class="product-card glass">
-                    <img src="https://via.placeholder.com/200/d4af37/000000?text=ISU+Cap">
-                    <h3>ISU Gold Cap</h3>
-                    <p>₱599.00</p>
-                    <button onclick="addToCart('ISU Cap', 599)">Add to Cart</button>
+                    <img src="https://via.placeholder.com/250/111/d4af37?text=ISU+Cap" alt="Cap">
+                    <h3>ISU Gold Edition Cap</h3>
+                    <p class="price">₱599.00</p>
+                    <button class="add-to-cart" onclick="addToCart('ISU Gold Cap', 599)">ADD TO BAG</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="size-guide" class="page">
+            <div class="center-container">
+                <div class="glass-box">
+                    <h2><i class="fas fa-ruler"></i> Find Your Fit</h2>
+                    <p>Enter your details for an accurate size recommendation.</p>
+                    <input type="number" id="height" placeholder="Height (cm)">
+                    <input type="number" id="weight" placeholder="Weight (kg)">
+                    <button class="btn-primary" onclick="calculateSize()">CALCULATE</button>
+                    <h3 id="size-result" class="gold"></h3>
                 </div>
             </div>
         </section>
 
         <section id="customize" class="page">
-            <div class="custom-panel glass">
-                <h2>Customize Your Jacket</h2>
-                <div class="options">
-                    <label>Choose Color:</label>
-                    <div class="color-picker">
-                        <div class="c1" title="Black/Gold"></div>
-                        <div class="c2" title="White/Gold"></div>
+            <div class="center-container">
+                <div class="glass-box">
+                    <h2>Personalize It</h2>
+                    <div class="custom-form">
+                        <label>Choose Lining Color:</label>
+                        <div class="color-options">
+                            <span class="color-dot gold-bg active"></span>
+                            <span class="color-dot white-bg"></span>
+                        </div>
+                        <label>Custom Name (Back):</label>
+                        <input type="text" placeholder="Type name here...">
+                        <button class="btn-primary" onclick="alert('Preview Updating...')">UPDATE PREVIEW</button>
                     </div>
-                    <label>Your Name on Back:</label>
-                    <input type="text" placeholder="Enter name...">
-                    <button class="btn-primary">PREVIEW CUSTOM</button>
                 </div>
             </div>
         </section>
 
         <section id="contact" class="page">
-            <div class="contact-form glass">
-                <h2>Contact Support</h2>
-                <input type="text" placeholder="Your Name">
-                <input type="email" placeholder="Your Email">
-                <textarea placeholder="Your Message"></textarea>
-                <button class="btn-primary">SEND MESSAGE</button>
+            <div class="center-container">
+                <div class="glass-box contact-grid">
+                    <div class="info">
+                        <h2>Get in Touch</h2>
+                        <p><i class="fas fa-map-marker-alt"></i> ISU Cabagan, Isabela</p>
+                        <p><i class="fas fa-envelope"></i> support@ease.ph</p>
+                    </div>
+                    <div class="form">
+                        <input type="text" placeholder="Full Name">
+                        <textarea placeholder="Your Message"></textarea>
+                        <button class="btn-primary">SEND MESSAGE</button>
+                    </div>
+                </div>
             </div>
         </section>
 
     </main>
 
-    <div id="payment-modal" class="modal">
+    <div id="checkout-modal" class="modal">
         <div class="modal-content glass">
-            <h2>Checkout Details</h2>
-            <div id="order-summary"></div>
-            <hr>
-            <h3>Select Payment Method</h3>
-            <button class="pay-btn" onclick="confirmPay('COD')"><i class="fas fa-truck"></i> Cash on Delivery</button>
-            <button class="pay-btn" onclick="confirmPay('QR')"><i class="fas fa-qrcode"></i> GCash / Maya (QR)</button>
-            <button class="close-btn" onclick="closePayment()">Cancel</button>
+            <h2>Your Bag</h2>
+            <div id="cart-items"></div>
+            <div class="total-row">
+                <span>Total:</span>
+                <span id="cart-total" class="gold">₱0</span>
+            </div>
+            <div class="payment-methods">
+                <p>Choose Payment:</p>
+                <button onclick="processOrder('COD')"><i class="fas fa-truck"></i> Cash on Delivery</button>
+                <button onclick="processOrder('QR')"><i class="fas fa-qrcode"></i> GCash / Maya (QR)</button>
+            </div>
+            <button class="close-btn" onclick="closeCart()">CANCEL</button>
         </div>
     </div>
 
+    <footer class="glass">
+        <div class="footer-content">
+            <h3>Stay in the Loop</h3>
+            <div class="newsletter">
+                <input type="email" id="email-sub" placeholder="Your Email Address">
+                <button onclick="subscribe()">SUBSCRIBE</button>
+            </div>
+        </div>
+    </footer>
+
     <script src="script.js"></script>
 </body>
-</html>
+                </html>
+                
