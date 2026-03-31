@@ -3,56 +3,103 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EASE | Premium Varsity Jacket</title>
+    <title>EASE | Premium University Apparel</title>
     <link rel="stylesheet" href="style.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
 </head>
 <body>
 
-    <div class="glass-container">
-        <header>
-            <h1 class="logo">EASE</h1>
-            <p class="subtitle">ISU CABAGAN EDITION v2.0</p>
-        </header>
+    <nav class="navbar">
+        <div class="nav-logo">EASE<span>.</span></div>
+        <ul class="nav-links">
+            <li><a href="#home" class="active">Home</a></li>
+            <li><a href="#customize">Customize</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+        <div class="nav-btns">
+            <i class='bx bx-shopping-bag'></i>
+            <button class="btn-login">Login</button>
+        </div>
+    </nav>
 
-        <section class="features-section">
-            <div class="feature-tag">Premium Nylon</div>
-            <div class="feature-tag">Gold Embroidery</div>
-            <div class="feature-tag">Water Resistant</div>
+    <main id="main-content">
+        
+        <section id="home" class="page active animate__animated animate__fadeIn">
+            <div class="hero-grid">
+                <div class="hero-text">
+                    <h2 class="badge">New Arrival 2026</h2>
+                    <h1>The <span>Varsity</span> <br> Revolution.</h1>
+                    <p>Elevate your campus identity with the Isabela State University limited edition jacket. Crafted for comfort, designed for prestige.</p>
+                    <div class="hero-actions">
+                        <button class="btn-primary" onclick="navTo('customize')">Get Yours Now</button>
+                        <button class="btn-outline">Watch Trailer <i class='bx bx-play-circle'></i></button>
+                    </div>
+                </div>
+                <div class="hero-image">
+                    <div class="glowing-orb"></div>
+                    <img src="https://i.ibb.co/L6v3K9v/jacket-front.png" alt="Jacket Mockup" class="floating-anim">
+                </div>
+            </div>
         </section>
 
-        <div class="order-form">
-            <label>Select Size</label>
-            <select id="sizeSelect">
-                <option value="S">Small (S)</option>
-                <option value="M">Medium (M)</option>
-                <option value="L">Large (L)</option>
-                <option value="XL">Extra Large (XL)</option>
-            </select>
+        <section id="customize" class="page">
+            <div class="configurator">
+                <div class="preview-box">
+                    <div class="glass-card">
+                        <h3 id="preview-title">ISU CABAGAN EDITION</h3>
+                        <p id="preview-desc">Selected Size: <span id="size-val">M</span></p>
+                        <div class="jacket-preview">
+                            <img id="jacket-img" src="https://i.ibb.co/L6v3K9v/jacket-front.png" alt="Front">
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="controls-box">
+                    <h3>Step 1: Choose Size</h3>
+                    <div class="size-picker">
+                        <button onclick="updateSize('S')">S</button>
+                        <button class="active" onclick="updateSize('M')">M</button>
+                        <button onclick="updateSize('L')">L</button>
+                        <button onclick="updateSize('XL')">XL</button>
+                    </div>
 
-            <label>Campus / Department</label>
-            <input type="text" id="deptInput" placeholder="e.g. ISU - BSIT">
-        </div>
+                    <h3>Step 2: Payment Gateway</h3>
+                    <div class="payment-grid">
+                        <div class="pay-card active" id="pay-cash" onclick="setPay('Cash')">
+                            <i class='bx bx-money'></i>
+                            <span>Cash</span>
+                        </div>
+                        <div class="pay-card" id="pay-qr" onclick="setPay('QR')">
+                            <i class='bx bx-qr-scan'></i>
+                            <span>GCash/QR</span>
+                        </div>
+                    </div>
 
-        <div class="payment-section">
-            <p>Payment Method:</p>
-            <div class="pay-options">
-                <button id="btnCash" class="pay-btn active" onclick="togglePayment('cash')">CASH</button>
-                <button id="btnQR" class="pay-btn" onclick="togglePayment('qr')">QR CODE</button>
+                    <div id="qr-container" class="qr-hidden">
+                        <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=EASE-ISU-PAY" alt="QR">
+                        <p>Merchant: EASE_OFFICIAL</p>
+                    </div>
+
+                    <button class="btn-checkout" onclick="initiateCheckout()">Confirm Order</button>
+                </div>
             </div>
+        </section>
 
-            <div id="qrDisplay" class="qr-box">
-                <p>Scan to Pay via GCash</p>
-                <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=EASE-PAY-ISU" alt="QR Code">
-                <p class="gcash-num">0917-XXX-XXXX</p>
+        <section id="contact" class="page">
+            <div class="contact-wrap">
+                <h2>Connect with <span>EASE</span></h2>
+                <div class="contact-grid">
+                    <div class="info-card"><i class='bx bxl-facebook-circle'></i> @EASE_Apparel</div>
+                    <div class="info-card"><i class='bx bx-envelope'></i> support@ease.com</div>
+                    <div class="info-card"><i class='bx bx-map-pin'></i> ISU Cabagan, Isabela</div>
+                </div>
             </div>
-        </div>
+        </section>
 
-        <button class="main-submit" onclick="processOrder()">SUBMIT ORDER</button>
+    </main>
 
-        <div id="statusTerminal" class="terminal">
-            <span class="cursor">></span> Ready for new order...
-        </div>
-    </div>
+    <div id="toast" class="toast">Order Successful!</div>
 
     <script src="script.js"></script>
 </body>
