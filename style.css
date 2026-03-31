@@ -1,77 +1,76 @@
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;700&display=swap');
-
 :root {
-    --gold: #FFD700;
-    --dark: #080808;
+    --accent: #FFD700;
+    --bg: #050505;
     --glass: rgba(255, 255, 255, 0.03);
-    --border: rgba(255, 215, 0, 0.15);
+    --border: rgba(255, 255, 255, 0.1);
 }
 
-* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
+* { margin: 0; padding: 0; box-sizing: border-box; cursor: none; } /* Hide cursor for custom one */
 
-body { background-color: var(--dark); color: white; overflow-x: hidden; }
+body {
+    background-color: var(--bg);
+    color: white;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    overflow-x: hidden;
+}
 
-/* Navbar Animation like Tyco */
-.navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px 8%;
-    position: fixed;
-    width: 100%;
-    z-index: 1000;
-    background: rgba(8, 8, 8, 0.8);
-    backdrop-filter: blur(10px);
+/* Custom Cursor */
+#custom-cursor {
+    width: 20px; height: 20px; background: var(--accent);
+    border-radius: 50%; position: fixed; pointer-events: none;
+    z-index: 9999; mix-blend-mode: difference; transition: transform 0.1s;
+}
+
+/* Navbar */
+.nav-blur {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 20px 5%; position: fixed; width: 100%; z-index: 100;
+    background: rgba(5, 5, 5, 0.5); backdrop-filter: blur(15px);
     border-bottom: 1px solid var(--border);
 }
 
-.nav-logo { font-size: 24px; font-weight: 700; color: white; }
-.nav-logo span { color: var(--gold); }
+.logo { font-weight: 800; letter-spacing: 2px; }
+.logo span { color: var(--accent); margin-left: 5px; font-weight: 300; }
 
-.nav-links { display: flex; list-style: none; gap: 30px; }
-.nav-links a { color: #888; text-decoration: none; transition: 0.3s; font-size: 14px; }
-.nav-links a:hover, .nav-links a.active { color: var(--gold); }
+.nav-menu { display: flex; list-style: none; gap: 40px; }
+.nav-link { text-decoration: none; color: #888; font-size: 13px; font-weight: 600; text-transform: uppercase; transition: 0.4s; }
+.nav-link.active, .nav-link:hover { color: var(--accent); }
 
-/* Multi-page System */
-.page { display: none; padding: 120px 8% 50px; min-height: 100vh; }
-.page.active { display: block; }
+/* Sections */
+.section { 
+    display: none; min-height: 100vh; padding: 150px 10% 50px; 
+    opacity: 0; transform: translateY(30px);
+}
+.section.active { display: block; opacity: 1; transform: translateY(0); transition: 0.8s; }
 
-/* Home Section Styles */
-.hero-grid { display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 50px; }
-.hero-text h1 { font-size: 65px; line-height: 1.1; margin: 20px 0; }
-.hero-text h1 span { color: var(--gold); }
-.hero-text p { color: #aaa; margin-bottom: 30px; line-height: 1.6; }
+/* Hero Styles */
+.hero-content .reveal { color: var(--accent); font-size: 12px; letter-spacing: 4px; display: block; margin-bottom: 10px; }
+.main-title { font-size: 80px; line-height: 0.9; margin-bottom: 20px; }
+.main-title span { -webkit-text-stroke: 1px white; color: transparent; }
 
-.badge { color: var(--gold); border: 1px solid var(--gold); display: inline-block; padding: 5px 15px; border-radius: 50px; font-size: 12px; }
-
-/* Floating Animation */
-.hero-image { position: relative; }
-.floating-anim { width: 100%; animation: float 6s ease-in-out infinite; filter: drop-shadow(0 0 30px rgba(255,215,0,0.2)); }
-
-@keyframes float {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-20px); }
+/* Jacket Animation */
+.jacket-float {
+    width: 100%; max-width: 500px;
+    filter: drop-shadow(0 0 50px rgba(255, 215, 0, 0.1));
+    animation: float 5s ease-in-out infinite;
 }
 
-/* Customize Section - Configurator */
-.configurator { display: grid; grid-template-columns: 1.2fr 1fr; gap: 40px; }
-.glass-card { background: var(--glass); border: 1px solid var(--border); padding: 40px; border-radius: 30px; backdrop-filter: blur(20px); text-align: center; }
+@keyframes float {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-20px) rotate(2deg); }
+}
 
-.size-picker { display: flex; gap: 10px; margin: 20px 0; }
-.size-picker button { flex: 1; padding: 12px; background: transparent; border: 1px solid #333; color: white; cursor: pointer; border-radius: 10px; }
-.size-picker button.active { border-color: var(--gold); color: var(--gold); }
+/* UI Panel */
+.glass-container {
+    background: var(--glass); border: 1px solid var(--border);
+    border-radius: 40px; padding: 50px; position: relative;
+}
 
-.payment-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 20px; }
-.pay-card { background: rgba(255,255,255,0.05); padding: 20px; border-radius: 15px; text-align: center; cursor: pointer; border: 1px solid transparent; transition: 0.3s; }
-.pay-card.active { border-color: var(--gold); background: rgba(255,215,0,0.1); }
-.pay-card i { font-size: 30px; color: var(--gold); margin-bottom: 10px; display: block; }
+.p-tab {
+    background: transparent; border: 1px solid var(--border);
+    color: white; padding: 15px 25px; border-radius: 12px; cursor: pointer;
+}
+.p-tab.active { background: var(--accent); color: black; border-color: var(--accent); }
 
-.qr-hidden { display: none; margin-top: 20px; text-align: center; background: white; padding: 20px; border-radius: 20px; color: black; animation: zoomIn 0.3s; }
-
-/* Buttons */
-.btn-primary { background: var(--gold); color: black; border: none; padding: 15px 35px; border-radius: 10px; font-weight: 700; cursor: pointer; }
-.btn-checkout { width: 100%; margin-top: 30px; background: white; color: black; border: none; padding: 18px; border-radius: 12px; font-weight: 700; cursor: pointer; }
-
-/* Toast */
-.toast { position: fixed; bottom: -100px; left: 50%; transform: translateX(-50%); background: var(--gold); color: black; padding: 15px 40px; border-radius: 50px; font-weight: bold; transition: 0.5s; z-index: 2000; }
-.toast.show { bottom: 50px; }
+.qr-box { background: white; padding: 20px; border-radius: 20px; color: black; text-align: center; margin-top: 20px; }
+.hidden { display: none; }
