@@ -3,104 +3,103 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EASE | Premium University Apparel</title>
-    <link rel="stylesheet" href="style.css">
+    <title>EASE | Premium Tech Apparel</title>
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <nav class="navbar">
-        <div class="nav-logo">EASE<span>.</span></div>
-        <ul class="nav-links">
-            <li><a href="#home" class="active">Home</a></li>
-            <li><a href="#customize">Customize</a></li>
-            <li><a href="#contact">Contact</a></li>
+    <div id="loader">
+        <div class="loader-content">EASE<span>.</span></div>
+    </div>
+
+    <nav class="nav-blur">
+        <div class="logo">EASE<span>STUDIO</span></div>
+        <ul class="nav-menu">
+            <li><a href="#home" class="nav-link active">Home</a></li>
+            <li><a href="#customize" class="nav-link">Customize</a></li>
+            <li><a href="#bulk" class="nav-link">Bulk</a></li>
+            <li><a href="#contact" class="nav-link">Contact</a></li>
         </ul>
-        <div class="nav-btns">
-            <i class='bx bx-shopping-bag'></i>
-            <button class="btn-login">Login</button>
+        <div class="nav-extra">
+            <button class="btn-glass"><i class='bx bx-user'></i> Account</button>
         </div>
     </nav>
 
-    <main id="main-content">
-        
-        <section id="home" class="page active animate__animated animate__fadeIn">
-            <div class="hero-grid">
-                <div class="hero-text">
-                    <h2 class="badge">New Arrival 2026</h2>
-                    <h1>The <span>Varsity</span> <br> Revolution.</h1>
-                    <p>Elevate your campus identity with the Isabela State University limited edition jacket. Crafted for comfort, designed for prestige.</p>
-                    <div class="hero-actions">
-                        <button class="btn-primary" onclick="navTo('customize')">Get Yours Now</button>
-                        <button class="btn-outline">Watch Trailer <i class='bx bx-play-circle'></i></button>
+    <main id="smooth-wrapper">
+        <div id="smooth-content">
+
+            <section id="home" class="section active">
+                <div class="hero-content">
+                    <span class="reveal">ESTABLISHED 2026</span>
+                    <h1 class="main-title">STITCHED WITH <br> <span>PRECISION.</span></h1>
+                    <p class="hero-desc">The official varsity manufacturer of Isabela State University. We blend university heritage with modern street aesthetics.</p>
+                    <div class="cta-group">
+                        <button class="btn-main" onclick="navigateTo('customize')">Start Designing</button>
+                        <button class="btn-sub">View Catalog</button>
                     </div>
                 </div>
-                <div class="hero-image">
-                    <div class="glowing-orb"></div>
-                    <img src="https://i.ibb.co/L6v3K9v/jacket-front.png" alt="Jacket Mockup" class="floating-anim">
+                <div class="hero-visual">
+                    <div class="orb"></div>
+                    <img src="648471276_866609436415959_6693978170280332519_n.jpg" class="jacket-float">
                 </div>
-            </div>
-        </section>
+            </section>
 
-        <section id="customize" class="page">
-            <div class="configurator">
-                <div class="preview-box">
-                    <div class="glass-card">
-                        <h3 id="preview-title">ISU CABAGAN EDITION</h3>
-                        <p id="preview-desc">Selected Size: <span id="size-val">M</span></p>
-                        <div class="jacket-preview">
-                            <img id="jacket-img" src="https://i.ibb.co/L6v3K9v/jacket-front.png" alt="Front">
+            <section id="customize" class="section">
+                <div class="config-grid">
+                    <div class="preview-stage">
+                        <div class="glass-container">
+                            <img src="650149970_1101251808867539_4604739577899725701_n.jpg" id="target-jacket">
+                            <div class="status-badge">PREVIEW MODE</div>
                         </div>
                     </div>
-                </div>
-                
-                <div class="controls-box">
-                    <h3>Step 1: Choose Size</h3>
-                    <div class="size-picker">
-                        <button onclick="updateSize('S')">S</button>
-                        <button class="active" onclick="updateSize('M')">M</button>
-                        <button onclick="updateSize('L')">L</button>
-                        <button onclick="updateSize('XL')">XL</button>
-                    </div>
-
-                    <h3>Step 2: Payment Gateway</h3>
-                    <div class="payment-grid">
-                        <div class="pay-card active" id="pay-cash" onclick="setPay('Cash')">
-                            <i class='bx bx-money'></i>
-                            <span>Cash</span>
+                    <div class="ui-panel">
+                        <h2>Configure Order</h2>
+                        <div class="control-group">
+                            <label>Pick Your Size</label>
+                            <div class="chip-group">
+                                <button class="chip active">S</button>
+                                <button class="chip">M</button>
+                                <button class="chip">L</button>
+                                <button class="chip">XL</button>
+                            </div>
                         </div>
-                        <div class="pay-card" id="pay-qr" onclick="setPay('QR')">
-                            <i class='bx bx-qr-scan'></i>
-                            <span>GCash/QR</span>
+                        <div class="control-group">
+                            <label>Payment Method</label>
+                            <div class="payment-tabs">
+                                <button id="cashBtn" class="p-tab active" onclick="switchPay('cash')"><i class='bx bx-wallet'></i> Cash</button>
+                                <button id="qrBtn" class="p-tab" onclick="switchPay('qr')"><i class='bx bx-qr-scan'></i> QR Code</button>
+                            </div>
                         </div>
+                        <div id="qr-area" class="qr-box hidden">
+                            <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=EASE-ISU" alt="QR">
+                            <p>GCash: 0917-XXX-XXXX</p>
+                        </div>
+                        <button class="btn-buy" onclick="completeOrder()">FINALIZE ORDER</button>
                     </div>
+                </div>
+            </section>
 
-                    <div id="qr-container" class="qr-hidden">
-                        <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=EASE-ISU-PAY" alt="QR">
-                        <p>Merchant: EASE_OFFICIAL</p>
+            <section id="contact" class="section">
+                <div class="contact-card">
+                    <h2>LET'S TALK</h2>
+                    <div class="input-float">
+                        <input type="text" placeholder="Full Name">
                     </div>
-
-                    <button class="btn-checkout" onclick="initiateCheckout()">Confirm Order</button>
+                    <div class="input-float">
+                        <textarea placeholder="Your Message"></textarea>
+                    </div>
+                    <button class="btn-main">Send Signal</button>
                 </div>
-            </div>
-        </section>
+            </section>
 
-        <section id="contact" class="page">
-            <div class="contact-wrap">
-                <h2>Connect with <span>EASE</span></h2>
-                <div class="contact-grid">
-                    <div class="info-card"><i class='bx bxl-facebook-circle'></i> @EASE_Apparel</div>
-                    <div class="info-card"><i class='bx bx-envelope'></i> support@ease.com</div>
-                    <div class="info-card"><i class='bx bx-map-pin'></i> ISU Cabagan, Isabela</div>
-                </div>
-            </div>
-        </section>
-
+        </div>
     </main>
 
-    <div id="toast" class="toast">Order Successful!</div>
+    <div id="custom-cursor"></div>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
