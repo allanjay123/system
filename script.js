@@ -1,87 +1,86 @@
-// Navigatation Engine
-function navTo(pageId) {
-    // Remove active from all pages and links
+let cart = [];
+let points = 0;
+
+// Navigation Logic
+function showPage(pageId) {
     document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-    document.querySelectorAll('.nav-links a').forEach(l => l.classList.remove('active'));
-
-    // Activate selected page
-    const targetPage = document.getElementById(pageId);
-    targetPage.classList.add('active');
+    document.getElementById(pageId).classList.add('active');
     
-    // Add animation
-    targetPage.classList.add('animate__animated', 'animate__fadeInUp');
-
-    // Update Nav Link
-    const activeLink = document.querySelector(`a[href="#${pageId}"]`);
-    if(activeLink) activeLink.classList.add('active');
-
-    window.scrollTo(0, 0);
+    document.querySelectorAll('.nav-links a').forEach(a => {
+        a.classList.remove('active');
+        if(a.innerText.toLowerCase() === pageId) a.classList.add('active');
+    });
 }
 
-// Sidebar Links Event Listener
-document.querySelectorAll('.nav-links a').forEach(link => {
-    link.onclick = (e) => {
-        e.preventDefault();
-        const id = link.getAttribute('href').replace('#', '');
-        navTo(id);
-    };
-});
-
-// Size Picker Logic
-function updateSize(size) {
-    document.querySelectorAll('.size-picker button').forEach(btn => btn.classList.remove('active'));
-    event.target.classList.add('active');
-    document.getElementById('size-val').innerText = size;
-}
-
-// Payment Switcher
-function setPay(type) {
-    document.querySelectorAll('.pay-card').forEach(c => c.classList.remove('active'));
-    const qrBox = document.getElementById('qr-container');
-    
-    if(type === 'QR') {
-        document.getElementById('pay-qr').classList.add('active');
-        qrBox.style.display = 'block';
-    } else {
-        document.getElementById('pay-cash').classList.add('active');
-        qrBox.style.display = 'none';
-    }
-}
-
-// Checkout Logic
-function initiateCheckout() {
-    const size = document.getElementById('size-val').innerText;
-    const btn = document.querySelector('.btn-checkout');
-    
-    btn.innerHTML = "<i class='bx bx-loader-alt bx-spin'></i> PROCESSING...";
-    btn.disabled = true;
-
-    // Simulate Server
+// 3D Rotate Simulation
+let currentView = 'front';
+function rotateJacket() {
+    const img = document.getElementById('main-jacket');
+    img.style.opacity = '0.5';
     setTimeout(() => {
-        showToast(`Order Placed: Size ${size} Jacket!`);
-        btn.innerHTML = "Confirm Order";
-        btn.disabled = false;
-        
-        // Go back to Home after 3 seconds
-        setTimeout(() => navTo('home'), 2000);
-    }, 2000);
+        img.src = (currentView === 'front') ? 'jacket-back.png' : 'jacket-front.png';
+        currentView = (currentView === 'front') ? 'back' : 'front';
+        img.style.opacity = '1';
+    }, 200);
 }
 
-function showToast(msg) {
-    const t = document.getElementById('toast');
-    t.innerText = msg;
-    t.classList.add('show');
-    setTimeout(() => t.classList.remove('show'), 3000);
+// Cart System
+function addToCart(name, price) {
+    cart.push({name, price});
+    updateCartUI();
+    alert(name + " added to bag!");
 }
 
-// Tyco Dev Scroll Effect (Navbar)
-window.onscroll = () => {
-    const nav = document.querySelector('.navbar');
-    if (window.scrollY > 50) {
-        nav.style.padding = "10px 8%";
-        nav.style.background = "rgba(8, 8, 8, 0.95)";
+function updateCartUI() {
+    document.getElementById('cart-count').innerText = cart.length;
+    let total = cart.reduce((sum, item) => sum + item.price, 0);
+    document.getElementById('cart-total').innerText = "₱" + total.toLocaleString();
+}
+
+function openCart() {
+    if(cart.length === 0) return alert("Your bag is empty.");
+    document.getElementById('checkout-modal').style.display = 'flex';
+}
+
+function closeCart() {
+    document.getElementById('checkout-modal').style.display = 'none';
+}
+
+// Payment & Points System
+function processOrder(method) {
+    let total = cart.reduce((sum, item) => sum + item.price, 0);
+    let earned = Math.floor(total * 0.05); // 5% points back
+    points += earned;
+    
+    if(method === 'QR') {
+        alert("Generating QR... Scan to pay ₱" + total);
     } else {
-        nav.style.padding = "20px 8%";
-        nav.style.background = "rgba(8, 8, 8, 0.8)";
+        alert("Order Confirmed! (COD)");
     }
-};
+    
+    // Update Loyalty Points
+    document.getElementById('user-points').innerText = points;
+    document.getElementById('points-badge').style.display = 'block';
+    
+    cart = [];
+    updateCartUI();
+    closeCart();
+}
+
+// Size Calculator
+function calculateSize() {
+    const w = document.getElementById('weight').value;
+    const res = document.getElementById('size-result');
+    if(!w) return alert("Please enter weight");
+    
+    if(w < 55) res.innerText = "YOUR SIZE: SMALL";
+    else if(w < 70) res.innerText = "YOUR SIZE: MEDIUM";
+    else if(w < 85) res.innerText = "YOUR SIZE: LARGE";
+    else res.innerText = "YOUR SIZE: XL / XXL";
+}
+
+// Newsletter
+function subscribe() {
+    const email = document.getElementById('email-sub').value;
+    if(email.includes('@')) alert("Subscribed! Check email for 10% OFF code.");
+}
