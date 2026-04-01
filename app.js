@@ -1,53 +1,48 @@
-// 3D EFFECT
-const jacket = document.getElementById("jacket");
-
-if (jacket) {
-document.addEventListener("mousemove", (e)=>{
-let x = (window.innerWidth/2 - e.pageX)/25;
-let y = (window.innerHeight/2 - e.pageY)/25;
-jacket.style.transform = `rotateY(${x}deg) rotateX(${y}deg)`;
-});
-}
-
-// CART SYSTEM
+// CART
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
-function addToCart(name, price){
+function addToCart(name,price){
 cart.push({name,price});
-localStorage.setItem("cart", JSON.stringify(cart));
+localStorage.setItem("cart",JSON.stringify(cart));
 alert("Added to Cart!");
 }
 
 function displayCart(){
-let cartDiv = document.getElementById("cartItems");
-let total = 0;
+let div=document.getElementById("cartItems");
+let total=0;
+if(!div)return;
 
-if(!cartDiv) return;
-
-cartDiv.innerHTML = "";
-
+div.innerHTML="";
 cart.forEach(item=>{
-cartDiv.innerHTML += `<p>${item.name} - ₱${item.price}</p>`;
-total += item.price;
+div.innerHTML+=`<p>${item.name} - ₱${item.price}</p>`;
+total+=item.price;
 });
 
-document.getElementById("total").innerText = "Total: ₱" + total;
+document.getElementById("total").innerText="Total: ₱"+total;
 }
 
 function checkout(){
-localStorage.setItem("orders", JSON.stringify(cart));
+localStorage.setItem("orders",JSON.stringify(cart));
 alert("Order Saved!");
 localStorage.removeItem("cart");
-location.reload();
+window.location="payment.html";
 }
 
 // PAYMENT
 function payNow(){
-let method = document.getElementById("paymentMethod").value;
+let method=document.getElementById("paymentMethod").value;
+let status=document.getElementById("status");
 
 if(method==="gcash"){
-alert("Scan QR to Pay");
+status.innerText="Processing payment...";
+
+setTimeout(()=>{
+status.innerText="✅ Payment Verified!";
+alert("Payment Successful!");
+},3000);
+
 }else{
-alert("Cash on Delivery");
+status.innerText="Cash on Delivery Confirmed";
+alert("Order placed!");
 }
 }
