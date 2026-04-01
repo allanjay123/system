@@ -1,7 +1,7 @@
 body{
 margin:0;
 font-family:sans-serif;
-background:linear-gradient(135deg,#000,#111,#c9a646);
+background:#0b0b0b;
 color:white;
 }
 
@@ -9,62 +9,136 @@ color:white;
 .glass{
 display:flex;
 justify-content:space-between;
-padding:15px;
-background:rgba(255,255,255,0.05);
-backdrop-filter:blur(10px);
+align-items:center;
+padding:15px 25px;
+background:#111;
+}
+
+.logo{
+font-size:24px;
+font-weight:bold;
 }
 
 nav a{
-margin:8px;
+margin:10px;
+font-size:14px;
 color:white;
 text-decoration:none;
 }
 
 /* HERO */
-.hero{
+.hero-banner{
+background:url('assets/jacket-front.png') center/cover;
+height:400px;
 display:flex;
-justify-content:space-around;
 align-items:center;
-flex-wrap:wrap;
-padding:40px;
+justify-content:center;
+text-align:center;
+border-radius:20px;
+margin:20px;
+}
+
+.hero-content h1{
+font-size:40px;
+font-weight:bold;
+}
+
+.hero-content p{
+font-size:16px;
+margin:10px 0;
+}
+
+.hero-btns{
+margin-top:15px;
 }
 
 .btn{
-background:gold;
-color:black;
-padding:10px 20px;
-border-radius:10px;
+padding:12px 20px;
+border-radius:25px;
+margin:5px;
+display:inline-block;
 }
 
-/* GALLERY */
-.gallery{
+.primary{
+background:gold;
+color:black;
+}
+
+.secondary{
+background:white;
+color:black;
+}
+
+/* FEATURED */
+.featured{
 padding:30px;
 text-align:center;
 }
 
-.grid{
+.featured h2{
+font-size:24px;
+margin-bottom:20px;
+}
+
+.card-grid{
 display:grid;
-grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
-gap:15px;
-}
-
-.grid img{
-width:100%;
-border-radius:10px;
-}
-
-/* PRODUCT */
-.product{
-display:flex;
-flex-wrap:wrap;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
 gap:20px;
+}
+
+.card{
+background:#1a1a1a;
+border-radius:15px;
+overflow:hidden;
+}
+
+.card img{
+width:100%;
+height:250px;
+object-fit:cover;
+}
+
+.card-info{
+padding:15px;
+text-align:left;
+}
+
+.card-info h3{
+font-size:18px;
+}
+
+.card-info span{
+color:gold;
+font-weight:bold;
+}
+
+/* FEATURES */
+.features{
+padding:30px;
+text-align:center;
+}
+
+.feature-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+gap:20px;
+}
+
+.feature-box{
+background:#1a1a1a;
 padding:20px;
+border-radius:15px;
 }
 
 /* MOBILE */
 @media(max-width:768px){
-.hero{
-flex-direction:column;
-text-align:center;
+
+.hero-content h1{
+font-size:28px;
 }
+
+.card img{
+height:200px;
+}
+
 }
