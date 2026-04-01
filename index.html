@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>EASE | Premium Varsity</title>
+<title>EASE</title>
 
 <link rel="stylesheet" href="style.css">
 <script defer src="app.js"></script>
@@ -17,24 +17,66 @@
 <a href="index.html">Home</a>
 <a href="shop.html">Shop</a>
 <a href="customizer.html">Customize</a>
-<a href="bulk.html">Bulk Orders</a>
-<a href="payment.html">Payment</a>
-<a href="contact.html">Contact</a>
+<a href="bulk.html">Bulk</a>
 <a href="cart.html">Cart</a>
+<a href="payment.html">Payment</a>
 </nav>
 </header>
 
 <section class="hero">
 <div>
 <h2>Premium Varsity Jacket</h2>
-<p>Black • Gold • White | ISU Inspired</p>
+<p>Black • Gold • White</p>
 <a href="shop.html" class="btn">Shop Now</a>
 </div>
 
-<div class="jacket-3d">
-<img src="Screenshot_20260331-175757.jpg">
+<div id="three-container"></div>
+</section>
+
+<!-- GALLERY -->
+<section class="gallery">
+<h2>Our Jackets</h2>
+<div class="grid">
+<img src="assets/jacket-front.png">
+<img src="assets/jacket-back.png">
+<img src="assets/jacket-front.png">
 </div>
 </section>
+
+<!-- THREE JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+<script>
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(75, 1, 0.1, 1000);
+
+const renderer = new THREE.WebGLRenderer({ alpha:true });
+renderer.setSize(300,300);
+document.getElementById("three-container").appendChild(renderer.domElement);
+
+const texture = new THREE.TextureLoader().load('assets/jacket-design.jpg');
+
+const geometry = new THREE.PlaneGeometry(3,3);
+const material = new THREE.MeshBasicMaterial({ map: texture });
+
+const jacket = new THREE.Mesh(geometry, material);
+scene.add(jacket);
+
+camera.position.z = 5;
+
+function animate(){
+requestAnimationFrame(animate);
+jacket.rotation.y += 0.01;
+renderer.render(scene, camera);
+}
+animate();
+
+// mouse control
+document.addEventListener("mousemove",(e)=>{
+let x = (window.innerWidth/2 - e.pageX)/100;
+jacket.rotation.y = x;
+});
+</script>
 
 </body>
 </html>
