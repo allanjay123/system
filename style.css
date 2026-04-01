@@ -1,49 +1,70 @@
-body {
+body{
 margin:0;
 font-family:sans-serif;
-background:black;
+background:linear-gradient(135deg,#000,#111,#c9a646);
 color:white;
 }
 
-.glass {
-background:rgba(255,255,255,0.05);
-backdrop-filter:blur(10px);
-padding:15px;
+/* HEADER */
+.glass{
 display:flex;
 justify-content:space-between;
+padding:15px;
+background:rgba(255,255,255,0.05);
+backdrop-filter:blur(10px);
 }
 
-nav a {
-margin:10px;
+nav a{
+margin:8px;
 color:white;
 text-decoration:none;
 }
 
-.hero {
+/* HERO */
+.hero{
 display:flex;
 justify-content:space-around;
 align-items:center;
-height:90vh;
+flex-wrap:wrap;
+padding:40px;
 }
 
-.btn {
+.btn{
 background:gold;
 color:black;
-padding:10px;
+padding:10px 20px;
+border-radius:10px;
 }
 
-.product {
+/* GALLERY */
+.gallery{
+padding:30px;
+text-align:center;
+}
+
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+gap:15px;
+}
+
+.grid img{
+width:100%;
+border-radius:10px;
+}
+
+/* PRODUCT */
+.product{
 display:flex;
+flex-wrap:wrap;
 gap:20px;
 padding:20px;
 }
 
-.jacket-3d img {
-width:300px;
-animation:spin 10s linear infinite;
+/* MOBILE */
+@media(max-width:768px){
+.hero{
+flex-direction:column;
+text-align:center;
 }
-
-@keyframes spin {
-from {transform:rotateY(0);}
-to {transform:rotateY(360deg);}
 }
