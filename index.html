@@ -11,72 +11,91 @@
 
 <body>
 
+<!-- HEADER -->
 <header class="glass">
-<h1 class="logo">EASE</h1>
-<nav>
-<a href="index.html">Home</a>
-<a href="shop.html">Shop</a>
-<a href="customizer.html">Customize</a>
-<a href="bulk.html">Bulk</a>
-<a href="cart.html">Cart</a>
-<a href="payment.html">Payment</a>
-</nav>
+  <h1 class="logo">EASE</h1>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="shop.html">Shop</a>
+    <a href="customizer.html">Customize</a>
+    <a href="bulk.html">Bulk Orders</a>
+    <a href="cart.html">Cart</a>
+    <a href="payment.html">Payment</a>
+  </nav>
 </header>
 
-<section class="hero">
-<div>
-<h2>Premium Varsity Jacket</h2>
-<p>Black • Gold • White</p>
-<a href="shop.html" class="btn">Shop Now</a>
-</div>
+<!-- HERO -->
+<section class="hero-banner">
+  <div class="hero-content">
+    <h1>WEAR YOUR LEGACY.</h1>
+    <p>The #1 Premium Varsity Jacket in Isabela</p>
 
-<div id="three-container"></div>
+    <div class="hero-btns">
+      <a href="shop.html" class="btn primary">View Collection</a>
+      <a href="customizer.html" class="btn secondary">Design Your Own</a>
+    </div>
+  </div>
 </section>
 
-<!-- GALLERY -->
-<section class="gallery">
-<h2>Our Jackets</h2>
-<div class="grid">
-<img src="Screenshot_20260331-175757.jpg">
-<img src="Screenshot_20260331-175757.jpg">
-<img src="assets/jacket-front.png">
-</div>
+<!-- FEATURED -->
+<section class="featured">
+  <h2>FEATURED COLLECTION</h2>
+
+  <div class="card-grid">
+
+    <div class="card">
+      <img src="Screenshot_20260331-175757.jpg">
+      <div class="card-info">
+        <h3>Executive Purple</h3>
+        <p>Premium Varsity Jacket</p>
+        <span>₱750</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="assets/jacket-back.png">
+      <div class="card-info">
+        <h3>Classic Collegiate</h3>
+        <p>High-grade material</p>
+        <span>₱800</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="assets/jacket-front.png">
+      <div class="card-info">
+        <h3>Midnight Bomber</h3>
+        <p>Sleek satin finish</p>
+        <span>₱500</span>
+      </div>
+    </div>
+
+  </div>
 </section>
 
-<!-- THREE JS -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<!-- FEATURES -->
+<section class="features">
+  <h2>THE EASE ADVANTAGE</h2>
 
-<script>
-const scene = new THREE.Scene();
-const camera = new THREE.PerspectiveCamera(75, 1, 0.1, 1000);
+  <div class="feature-grid">
 
-const renderer = new THREE.WebGLRenderer({ alpha:true });
-renderer.setSize(300,300);
-document.getElementById("three-container").appendChild(renderer.domElement);
+    <div class="feature-box">
+      <h3>Premium Quality</h3>
+      <p>Top-tier fabrics and stitching.</p>
+    </div>
 
-const texture = new THREE.TextureLoader().load('assets/jacket-design.jpg');
+    <div class="feature-box">
+      <h3>Local & Fast</h3>
+      <p>Fast delivery across Isabela.</p>
+    </div>
 
-const geometry = new THREE.PlaneGeometry(3,3);
-const material = new THREE.MeshBasicMaterial({ map: texture });
+    <div class="feature-box">
+      <h3>Fully Custom</h3>
+      <p>Design your own varsity jacket.</p>
+    </div>
 
-const jacket = new THREE.Mesh(geometry, material);
-scene.add(jacket);
-
-camera.position.z = 5;
-
-function animate(){
-requestAnimationFrame(animate);
-jacket.rotation.y += 0.01;
-renderer.render(scene, camera);
-}
-animate();
-
-// mouse control
-document.addEventListener("mousemove",(e)=>{
-let x = (window.innerWidth/2 - e.pageX)/100;
-jacket.rotation.y = x;
-});
-</script>
+  </div>
+</section>
 
 </body>
 </html>
